@@ -8,7 +8,8 @@ const app = express();
 const API_KEY = "AIzaSyA5mNf4-R9QtlGvJq4NQT0nBuIFDPH_pUk";
 const fileManager = new GoogleAIFileManager(API_KEY);
 
-app.use(express.json());
+app.use(express.json({ limit: "100mb" }));
+
 
 app.post("/upload", async (req, res) => {
   const { imageBase64, mimeType, name } = req.body;
