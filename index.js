@@ -21,7 +21,7 @@ app.post("/upload", async (req, res) => {
   const buffer = Buffer.from(imageBase64, "base64");
 
   // Define a temporary file path
-  const tempFilePath = join(tmpdir(), `${name}.jpg`);
+  const tempFilePath = join(tmpdir(), `${name}.png`);
 
   try {
     // Write the buffer to a temporary file
