@@ -13,6 +13,7 @@ app.use(express.json({ limit: "100mb" }));
 
 app.post("/upload", async (req, res) => {
   const { imageBase64, mimeType, name } = req.body;
+  
   if (!imageBase64 || !mimeType || !name) {
     return res.status(400).json({ status: "Error", message: "Invalid body" });
   }
@@ -39,6 +40,8 @@ app.post("/upload", async (req, res) => {
     // Send response with uploaded file details
     const file = uploadResult.file;
     const data = { status: "Ok", ...file };
+
+    fileManager.deleteFile(uploadResult.file.name);
     console.log(`File uploaded: ${JSON.stringify(data)}`);
     return res.json(data);
 
@@ -55,10 +58,6 @@ app.post("/upload", async (req, res) => {
       message: error.message,
     });
   }
-});
-
-app.get("/upload", (req, res) => {
-  res.send("Upload File");
 });
 
 app.get("/", (req, res) => {
