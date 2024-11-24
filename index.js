@@ -41,7 +41,6 @@ app.post("/upload", async (req, res) => {
     const file = uploadResult.file;
     const data = { status: "Ok", ...file };
 
-    fileManager.deleteFile(uploadResult.file.name);
     console.log(`File uploaded: ${JSON.stringify(data)}`);
     return res.json(data);
 
